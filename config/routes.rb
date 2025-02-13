@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
-  get "home/index"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
   root "home#index"
+
+  get "employees/dashboard"
+  get "admins/dashboard"
+  devise_for :users, controllers: { registrations: "users/registrations",
+  confirmations: "users/confirmations", sessions: "users/sessions", passwords: "users/passwords" }
+
+  authenticate :user, ->(u) { u.admin? } do
+    get "admin_dashboard", to: "admins#dashboard"
+  end
+
+  authenticate :user, ->(u) { u.employee? } do
+    get "employee_dashboard", to: "employees#dashboard"
+  end
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

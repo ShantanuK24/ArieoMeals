@@ -1,8 +1,48 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+    # before_action :configure_sign_up_params, only: [:create]
+    # before_action :configure_account_update_params, only: [:update]
+
+    before_action :configure_sign_up_params, only: [ :create ]
+
+    def create
+      build_resource(sign_up_params)
+
+      if resource.save
+        # Explicitly prevent auto-login
+        yield resource if block_given?
+        set_flash_message! :notice, :signed_up
+        redirect_to new_user_session_path # Redirect to login page
+      else
+        clean_up_passwords resource
+        set_minimum_password_length
+        respond_with resource
+      end
+    end
+
+    def after_sign_up_path_for(resource)
+      new_user_session_path
+    end
+
+
+    # def after_sign_up_path_for(resource)
+    #   new_user_session_path # Redirects to login page after sign-up
+    # end
+
+
+
+
+    def configure_sign_up_params
+      devise_parameter_sanitizer.permit(:sign_up, keys: [ :name ])
+      devise_parameter_sanitizer.permit(:account_update, keys: [ :name ])
+    end
+
+    def build_resource(hash = {})
+      hash[:type] = "Employee"
+      super
+    end
+
 
   # GET /resource/sign_up
   # def new
