@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  
+  resources :daily_meal_records
+  resources :feedbacks
+
+
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
