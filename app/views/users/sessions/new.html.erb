@@ -1,26 +1,56 @@
-<h2>Log in</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <%= stylesheet_link_tag "application", media: "all" %>
+</head>
+<body>
+<body style="background: url('<%= asset_path('Food.jpg') %>') no-repeat center center/cover;">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="wrapper">
+        <div class="glass-box"></div>
+        <div class="container">
+            <div class="left-box">
+                <h2 class="brand">arieoMeals</h2>
+            </div>
+            <div class="login-box">
+                <h2>Login</h2>
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                    <label for="email">Email</label>
+                    <%= f.email_field :email, id: "email", placeholder: "Enter your email", required: true %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <%= f.password_field :password, id: "password", placeholder: "Enter your password", required: true %>
+                    </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+
+                    <%# <% if devise_mapping.rememberable? %>
+                     <%#<div class="remember-me">
+                     <%#    <%= f.check_box :remember_me, id: "remember_me" %>
+                     <%#    <%= f.label :remember_me, "Remember Me", for: "remember_me" %>
+                     <%#</div>
+                     <%#<% end %> 
+
+
+                    <div class="forgot-password">
+                        <%= link_to "Forgot Password?", new_password_path(resource_name) %>
+                    </div>
+
+                    <div class="actions">
+                        <%= f.submit "Sign in", class: "btn" %>
+                    </div>
+                <% end %>
+
+                <p class="or-text">or</p>
+                <p class="register-text">Don't have an account yet? <%= link_to "Register Here", new_registration_path(resource_name) %></p>
+            </div>
+        </div>
     </div>
-  <% end %>
+</body>
+</html>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
 
-<%= render "users/shared/links" %>
+
+
+
