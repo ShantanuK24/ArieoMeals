@@ -2,6 +2,14 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
+
+  namespace :admin do
+    resources :daily_meal_records, only: [:index] 
+ 
+    resources :feedbacks, only: [:index]
+  end
+
+
   get "home/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

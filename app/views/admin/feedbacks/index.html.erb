@@ -1,0 +1,32 @@
+<h2>Employee Feedbacks</h2>
+
+<%= form_with url: admin_feedbacks_path, method: :get, local: true, id: "filter-feedback-form" do %>
+  <label for="date">Select Date:</label>
+  <%= date_field_tag :date, @date, onchange: "document.getElementById('filter-feedback-form').submit();" %>
+<% end %>
+
+<p>Average Dinner Rating: <%= @average_dinner_rating %></p>
+<p>Average Snack Rating: <%= @average_snack_rating %></p>
+
+<% if @feedbacks.any? %>
+  <table>
+    <tr>
+      <th>Names</th>
+      <th>Comments for Dinner</th>
+      <th>Comments for Snack</th>
+      <th>Rating for Dinner</th>
+      <th>Rating for Snack</th>
+    </tr>
+    <% @feedbacks.each do |feedback| %>
+      <tr>
+        <td><%= feedback.user.name %></td>
+        <td><%= feedback.comments_for_dinner.presence || "N/A" %></td>
+        <td><%= feedback.comments_for_snack.presence || "N/A" %></td>
+        <td><%= feedback.rating_for_dinner.presence || "N/A" %></td>
+        <td><%= feedback.rating_for_snack.presence || "N/A" %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>No feedback found for this date.</p>
+<% end %>

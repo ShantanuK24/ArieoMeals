@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Meals Records</title>
+    <%= stylesheet_link_tag "daily_meal_records" %>
+    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" %>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2 class="logo">arieoMeals</h2>
+            <nav>
+                <ul>
+                <li class="nav-btn">
+                <%= link_to admin_daily_meal_records_path, class: "btn-link" do %>
+                  <i class="fas fa-utensils"></i> Daily Meals Records
+                <% end %>
+              </li>
+              
+              <li class="nav-btn">
+                <%= link_to admin_feedbacks_path, class: "btn-link" do %>
+                  <i class="fas fa-comment-dots"></i> Feedback
+                <% end %>
+              </li>
+              
+                </ul>
+            </nav>
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "logout-btn" %>
+        </aside>
+        <main class="main-content">
+            <header>
+                <h1>Daily Meals Records</h1>
+                <div class="date">
+                    <%= form_with url: admin_daily_meal_records_path, method: :get, class: "date-form", local: true do |f| %>
+                        <select class="meal-filter">
+                            <option>Snacks</option>
+                            <option>Dinner</option>
+                        </select>
+                        <span class="selected-date"><%= @date.strftime("%B %d, %A %Y") %></span>
+                        <label for="datePicker" class="calendar-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </label>
+                        <%= f.date_field :date, value: @date, onchange: "this.form.submit();", class: "date-picker" %>
+                    <% end %>
+                </div>
+            </header>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Snacks</th>
+                            <th>Dinner</th>
+                            <th>Roti for Dinner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @meal_records.each do |record| %>
+                            <tr>
+                                <td><%= record.user.name %></td>
+                                <td><%= record.snack ? "Yes" : "No" %></td>
+                                <td><%= record.dinner ? "Yes" : "No" %></td>
+                                <td><%= record.chapati_count %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+
+            <%= link_to admin_daily_meal_records_path(format: :csv), class: "download-btn" do %>
+                <i class="fas fa-download"></i> Download
+            <% end %>
+        </main>
+    </div>
+</body>
+</html>
