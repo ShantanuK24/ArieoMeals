@@ -31,12 +31,9 @@
         <%= link_to "Employee Dashboard", employee_dashboard_path %>
       <% end %>
     <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
-    <% else %>
-      <%= link_to "Login", new_user_session_path %>
     <% end %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+   
     <%= yield %>
   </body>
 </html>

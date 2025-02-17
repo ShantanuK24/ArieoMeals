@@ -5,8 +5,15 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body {
+/* body {
     background: url('Food.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+body {
+    background: image-url('Food.jpg') no-repeat center center/cover;
     height: 100vh;
     display: flex;
     justify-content: center;
