@@ -1,6 +1,6 @@
 /* General Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Inter, sans-serif;
     margin: 0;
     padding: 0;
     overflow: hidden; /* Removes scroll */
@@ -8,7 +8,7 @@ body {
 
 .container {
     display: flex;
-    margine:
+    margin: auto;
 }
 
 /* Sidebar Styling */
@@ -109,7 +109,7 @@ body {
     width: 100%;
     margin-top: auto;  /* Push to bottom */
     position: relative; /* Prevents overlap */
-    bottom: 50px; /* Moves it slightly up from the absolute bottom */
+    bottom: 30px; /* Moves it slightly up from the absolute bottom */
 }
 
 .logout-btn:hover {
@@ -129,7 +129,7 @@ header {
     justify-content: space-between;
     align-items: center;
     background: white;
-    padding: 15px 20px;
+    padding: 10px 20px;
     border-radius: 8px;
     margin-bottom: 20px;
 }
@@ -168,17 +168,22 @@ header {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow */
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    border-spacing: 0;
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 thead {
     background: black;
     color: white;
+    border-radius: 10px;
 }
 
 th, td {
@@ -245,3 +250,44 @@ tr:last-child td {
 .download-btn i {
     margin-right: 5px;
 }
+
+/* table toggle css */
+
+.hidden {
+    display: none;
+}
+
+.meal-filter {
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    border: solid orange;
+    border-radius: 5px;
+}
+.meal-filter:focus,
+.meal-filter:active {
+    border: 2px solid orange !important;
+}
+.meal-filter::-webkit-focus-ring-color {
+    color: orange !important;
+}
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table-container th, .table-container td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.table-container th {
+    background-color: black;
+    color: white;
+}
+
+

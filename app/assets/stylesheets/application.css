@@ -9,3 +9,6 @@
  
  * Consider organizing styles into separate files for maintainability.
  */
+ body {
+    font-family: 'Inter';
+}

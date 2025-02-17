@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Meals Records</title>
-    <%= stylesheet_link_tag "daily_meal_records" %>
+    
+    <%= stylesheet_link_tag "https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" %>
     <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" %>
+    <%= stylesheet_link_tag "daily_meal_records" %>
 </head>
 <body>
     <div class="container">
@@ -14,30 +16,30 @@
             <h2 class="logo">arieoMeals</h2>
             <nav>
                 <ul>
-                <li class="nav-btn">
-                <%= link_to admin_daily_meal_records_path, class: "btn-link" do %>
-                  <i class="fas fa-utensils"></i> Daily Meals Records
-                <% end %>
-              </li>
-              
-              <li class="nav-btn">
-                <%= link_to admin_feedbacks_path, class: "btn-link" do %>
-                  <i class="fas fa-comment-dots"></i> Feedback
-                <% end %>
-              </li>
-              
+                    <li class="nav-btn">
+                        <%= link_to admin_daily_meal_records_path, class: "btn-link" do %>
+                            <i class="fas fa-utensils"></i> Daily Meals Records
+                        <% end %>
+                    </li>
+                    <li class="nav-btn">
+                        <%= link_to admin_feedbacks_path, class: "btn-link" do %>
+                            <i class="fas fa-comment-dots"></i> Feedback
+                        <% end %>
+                    </li>
                 </ul>
             </nav>
             <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "logout-btn" %>
         </aside>
+
         <main class="main-content">
             <header>
                 <h1>Daily Meals Records</h1>
                 <div class="date">
                     <%= form_with url: admin_daily_meal_records_path, method: :get, class: "date-form", local: true do |f| %>
-                        <select class="meal-filter">
-                            <option>Snacks</option>
-                            <option>Dinner</option>
+                        <select id="meal-filter" class="meal-filter">
+                            <option value="default">All</option>
+                            <option value="snacks">Snacks</option>
+                            <option value="dinner">Dinner</option>
                         </select>
                         <span class="selected-date"><%= @date.strftime("%B %d, %A %Y") %></span>
                         <label for="datePicker" class="calendar-icon">
@@ -49,32 +51,134 @@
             </header>
 
             <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Snacks</th>
-                            <th>Dinner</th>
-                            <th>Roti for Dinner</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @meal_records.each do |record| %>
+                <!-- Default Table (All Records) -->
+                <div id="default-table">
+                    <table id="mealRecordsTable">
+                        <thead>
                             <tr>
-                                <td><%= record.user.name %></td>
-                                <td><%= record.snack ? "Yes" : "No" %></td>
-                                <td><%= record.dinner ? "Yes" : "No" %></td>
-                                <td><%= record.chapati_count %></td>
+                                <th>Name</th>
+                                <th>Snacks</th>
+                                <th>Dinner</th>
+                                <th>Roti for Dinner</th>
                             </tr>
-                        <% end %>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <% @meal_records.each do |record| %>
+                                <tr>
+                                    <td><%= record.user.name %></td>
+                                    <td><%= record.snack ? "Yes" : "No" %></td>
+                                    <td><%= record.dinner ? "Yes" : "No" %></td>
+                                    <td><%= record.chapati_count %></td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Snacks Table -->
+                <div id="snacks-table" class="hidden">
+                    <table id="snacksTable">
+                        <thead>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @meal_records.select { |record| record.snack }.each_with_index do |record, index| %>
+                                <tr>
+                                    <td><%= index + 1 %></td>
+                                    <td><%= record.user.name %></td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Dinner Table -->
+                <div id="dinner-table" class="hidden">
+                    <table id="dinnerTable">
+                        <thead>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>Name</th>
+                                <th>Chapati Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @meal_records.select { |record| record.dinner }.each_with_index do |record, index| %>
+                                <tr>
+                                    <td><%= index + 1 %></td>
+                                    <td><%= record.user.name %></td>
+                                    <td><%= record.chapati_count %></td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
+            <div></div>
             <%= link_to admin_daily_meal_records_path(format: :csv), class: "download-btn" do %>
                 <i class="fas fa-download"></i> Download
             <% end %>
         </main>
     </div>
+
+    <!-- Include DataTables JS -->
+    <%= javascript_include_tag "https://code.jquery.com/jquery-3.6.0.min.js" %>
+    <%= javascript_include_tag "https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" %>
+
+    <!-- JavaScript to Toggle Tables -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let mealFilter = document.getElementById("meal-filter");
+            let defaultTable = document.getElementById("default-table");
+            let snacksTable = document.getElementById("snacks-table");
+            let dinnerTable = document.getElementById("dinner-table");
+
+            mealFilter.addEventListener("change", function () {
+                let value = this.value;
+                defaultTable.style.display = value === "default" ? "block" : "none";
+                snacksTable.style.display = value === "snacks" ? "block" : "none";
+                dinnerTable.style.display = value === "dinner" ? "block" : "none";
+            });
+        });
+    </script>
+
+    <!-- Initialize DataTable for all tables -->
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable for default table
+            $('#mealRecordsTable').DataTable({
+                paging: true, 
+                searching: false,       
+                ordering: false,        
+                info: true,            
+                lengthChange: false,    
+                pageLength: 7          
+            });
+
+            // Initialize DataTable for snacks table
+            $('#snacksTable').DataTable({
+                paging: true, 
+                searching: false,       
+                ordering: false,        
+                info: true,            
+                lengthChange: false,    
+                pageLength: 7          
+            });
+
+            // Initialize DataTable for dinner table
+            $('#dinnerTable').DataTable({
+                paging: true, 
+                searching: false,       
+                ordering: false,        
+                info: true,            
+                lengthChange: false,    
+                pageLength: 7
+            });
+        });
+    </script>
 </body>
 </html>
