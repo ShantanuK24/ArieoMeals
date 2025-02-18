@@ -1,25 +1,62 @@
-<h2>Change your password</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password - arieoMeals</title>
+     <%= stylesheet_link_tag "forget_password", media: "all" %>
+    
+</head>
+<body>
+<body style="background: url('<%= asset_path('food.jpg') %>') no-repeat center center/cover;">
+    <div class="wrapper">
+        <div class="glass-box"></div>
+        <div class="container">
+            <div class="left-box">
+                <h2 class="brand">arieoMeals</h2>
+            </div>
+            <div class="reset-box">
+                <h2>Reset Password</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+                <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+                    <%= render "users/shared/error_messages", resource: resource %>
+                    <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+                    <label for="email">Email</label>
+                    <%= f.email_field :email, id: "email", placeholder: "Enter your email", required: true %>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+                    <label for="new-password">New Password</label>
+                    <div class="password-wrapper">
+                        <%= f.password_field :password, id: "new-password", placeholder: "Enter your password", required: true, autocomplete: "new-password" %>
+                        <button type="button" class="toggle-password" onclick="togglePassword('new-password')">
+                            👁️
+                        </button>
+                    </div>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+                    <label for="confirm-password">Re-Enter Password</label>
+                    <div class="password-wrapper">
+                        <%= f.password_field :password_confirmation, id: "confirm-password", placeholder: "Confirm your password", required: true, autocomplete: "new-password" %>
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirm-password')">
+                            👁️
+                        </button>
+                    </div>
 
-<%= render "users/shared/links" %>
+                    <button type="submit" class="btn">Reset</button>
+                <% end %>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(fieldId) {
+            let passwordField = document.getElementById(fieldId);
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+    </script>
+
+</body>
+</html>
