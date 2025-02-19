@@ -3,8 +3,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password - arieoMeals</title>
-     <%= stylesheet_link_tag "application", media: "all" %>
-    <body style="background: url('<%= asset_path('Food.jpg') %>') no-repeat center center/cover;">
+    <link rel="stylesheet" type="text/css" href="forget_password.css" media=”screen” />
+    <body style="background: url('<%= asset_path('pexels.jpg') %>') no-repeat center center/cover;">
 </head>
 <body>
 
@@ -28,7 +28,7 @@
                     <div class="password-wrapper">
                         <%= f.password_field :password, id: "new-password", placeholder: "Enter your password", required: true, autocomplete: "new-password" %>
                         <button type="button" class="toggle-password" onclick="togglePassword('new-password')">
-                            👁️
+                            👁️‍🗨️
                         </button>
                     </div>
 
@@ -36,7 +36,7 @@
                     <div class="password-wrapper">
                         <%= f.password_field :password_confirmation, id: "confirm-password", placeholder: "Confirm your password", required: true, autocomplete: "new-password" %>
                         <button type="button" class="toggle-password" onclick="togglePassword('confirm-password')">
-                            👁️
+                            👁️‍🗨️
                         </button>
                     </div>
 
