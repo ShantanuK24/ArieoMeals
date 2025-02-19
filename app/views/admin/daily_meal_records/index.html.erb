@@ -7,33 +7,16 @@
     
     <%= stylesheet_link_tag "https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" %>
     <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" %>
-    <%= stylesheet_link_tag "daily_meal_records" %>
+    <%= stylesheet_link_tag "admin_daily_meal_records" %>
 </head>
 <body>
     <div class="container">
         <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2 class="logo">arieoMeals</h2>
-            <nav>
-                <ul>
-                    <li class="nav-btn">
-                        <%= link_to admin_daily_meal_records_path, class: "btn-link" do %>
-                            <i class="fas fa-utensils"></i> Daily Meals Records
-                        <% end %>
-                    </li>
-                    <li class="nav-btn">
-                        <%= link_to admin_feedbacks_path, class: "btn-link" do %>
-                            <i class="fas fa-comment-dots"></i> Feedback
-                        <% end %>
-                    </li>
-                </ul>
-            </nav>
-            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "logout-btn" %>
-        </aside>
+        <%= render 'shared/admin/sidebar' %>
 
         <main class="main-content">
-            <header>
-                <h1>Daily Meals Records</h1>
+            <header class="header">
+                <h2>Daily Meals Records</h2>
                 <div class="date">
                     <%= form_with url: admin_daily_meal_records_path, method: :get, class: "date-form", local: true do |f| %>
                         <select id="meal-filter" class="meal-filter">

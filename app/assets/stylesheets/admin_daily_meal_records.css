@@ -131,17 +131,17 @@ body {
 .main-content {
     flex: 1;
     padding: 20px;
-    overflow: hidden; /* Prevents unnecessary scrolling */
 }
 
-header {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
 }
 
 /* Date Picker Section */
