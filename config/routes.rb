@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+    namespace :employee do
+      resources :daily_meal_records, only: [:new, :create]
+      resources :feedbacks, only: [:new, :create] do
+        collection do
+          get 'no_feedback' 
+        end
+      end
+    end
   
-  resources :daily_meal_records
-  resources :feedbacks
-
-
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }

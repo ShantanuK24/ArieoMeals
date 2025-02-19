@@ -1,28 +1,41 @@
 class Employee::FeedbacksController < ApplicationController
+  before_action :set_daily_meal_record, only: [:new, :create]
 
-    def new
-      @feedback = Feedback.new
+  def new
+    # feedback for yesterday's meal
+    if @daily_meal_record
+     @feedback =  Employee::Feedback.new
+    else
+      redirect_to no_feedback_employee_feedbacks_path
     end
+  end
   
-    def create
-      @feedback = current_user.feedbacks.build(feedback_params)
-      @feedback.date = Date.yesterday  # it's for yesterday's meal
+  def create
+    @feedback = Employee::Feedback.where(created_at: Date.today.all_day, user_id: current_user.id)
+    unless @feedback.present?
+      @feedback = Employee::Feedback.new(feedback_params)
+      @feedback.user = current_user  # the feedback is for yesterday's meal
+      
+      if @feedback.save
+        redirect_to new_employee_feedback_path, notice: "Thank you for your feedback!"
+      else
+        render :new
+      end
+    else
+      redirect_to new_employee_feedback_path, notice: "Feedback already submitted"
+    end
+  end
+  
+  private
 
-          if @feedback.save
-              redirect_to feedbacks_path, notice: "Thank you for your feedback!"
-          else
-              render :new
-          end
-    end
+  def set_daily_meal_record
+    @daily_meal_record = Employee::DailyMealRecord.find_by(user_id: current_user.id, date: Date.yesterday)
+    
+    return false unless @daily_meal_record.present?
+  end
 
-    def index
-      @feedbacks = current_user.feedbacks.where(date: Date.yesterday)
-    end
-    
-    private
-    
-    def feedback_params
-      params.require(:feedback).permit(:user_id, :comments_for_snack, :rating_for_snack, :comments_for_dinner, :rating_for_dinner)
-    end
+  def feedback_params
+    params.require(:employee_feedback).permit( :rating_for_dinner, :rating_for_snack)
+  end
 
 end

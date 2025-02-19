@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - arieoMeals</title>
+    <%= stylesheet_link_tag "Feedback", media: "all" %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <%= javascript_importmap_tags %>
+</head>
+<body>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2 class="brand">arieoMeals</h2>
+            <ul class="nav-menu">
+                <li>
+                    <span class="icon"><i class="fas fa-utensils"></i></span> 
+                    <%= link_to "Daily Meals", new_employee_daily_meal_record_path %>
+                </li>
+                <li class="active">
+                    <span class="icon"><i class="fas fa-comments"></i></span> 
+                    <%= link_to "Feedback", new_employee_feedback_path, class: "btn btn-primary" %>
+                </li>
+            </ul>
+            <div class="logout-btn">
+                 <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "logout-btn" %>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <h2>Your feedback matters</h2>
+            <div class="feedback-container">
+                <div class="feedback-header">
+                    <span>Give your feedback</span>
+                    <span class="feedback-date"><%= Date.today.strftime("%B %d, %A %Y") %></span>
+                </div>
+
+                <%= form_with model: @feedback, url: employee_feedbacks_path, method: :post, local: true do |f| %>
+                    <div class="rating-section">
+                        <div class="rating-item">
+                            <%= f.label :rating_for_snack, "Snack Rating", class: "rating-label" %>
+                            <%= f.select :rating_for_snack, options_for_select([1, 2, 3, 4, 5]) %>
+                        </div>
+
+                        <div class="rating-item">
+                            <%= f.label :rating_for_dinner, "Dinner Rating", class: "rating-label" %>
+                            <%= f.select :rating_for_dinner, options_for_select([1, 2, 3, 4, 5]) %>
+                        </div>
+                    </div>
+
+                    <div class="comment-section">
+                        <%= f.label :comments, "Your comments" %>
+                        <%= f.text_field :comments, placeholder: "Enter your comments" %>
+                    </div>                
+
+                    <div class="submit-btn-wrapper">
+                        <%= f.submit "Submit", class: "submit-btn" %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+

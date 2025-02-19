@@ -1,37 +1,51 @@
 class Employee::DailyMealRecordsController < ApplicationController
-  #before_action :check_access_time, only: [:new] # Restrict access based on time
-
+  before_action :authenticate_user!
+  before_action :check_access_time, only: [:create] # Restrict access based on time
     # GET /daily_meal_records/new
     def new
-         @daily_meal_record = DailyMealRecord.new
+         @daily_meal_record = Employee::DailyMealRecord.new
     end
   
     # POST /daily_meal_records
     def create
-      @daily_meal_record = current_user.daily_meal_records.new(meal_params) 
-      @daily_meal_record.user_id = params[:user_id] # Assign user_id 
-  
-      if @daily_meal_record.save
-        redirect_to @daily_meal_record, notice: "Meal added successfully!"
+      unless check_duplicate_record
+        @daily_meal_record = current_user.daily_meal_records.new(meal_params) 
+        @daily_meal_record.date = Date.today
+        @daily_meal_record.user_id = current_user.id # Assign user_id 
+        if @daily_meal_record.save
+          redirect_to new_employee_daily_meal_record_path, notice: "Meal added successfully!"
+        else
+          flash.now[:alert] = "Failed to add meal. Please try again."
+          render :new
+        end
       else
-       # puts @daily_meal_record.errors.full_messages
-        #flash[:alert] = @daily_meal_record.errors.full_messages.join(", ")
-        render :new
+        redirect_to new_employee_daily_meal_record_path, notice: "Meal already added successfully!"
       end
     end
-  
+
+    def index
+      @daily_meal_records = DailyMealRecord.all
+    end
+
     private
     # Strong parameters
     def meal_params
-      params.require(:daily_meal_record).permit(:date, :snack, :dinner, :chapati_count)
+      params.require(:employee_daily_meal_record).permit(:date, :snack, :dinner, :chapati_count)
     end
-  
-    def check_access_time
-    current_hour = Time.zone.now.hour
-    unless current_hour == 12  # Only allow access between 12:00 PM and 12:59 PM
-      redirect_to @daily_meal_record, alert: "You can only access meals between 12:00 PM and 1:00 PM."
+    
+    def check_duplicate_record
+     current_user.daily_meal_records.find_by(date: Date.today).present?
     end
 
-  end
+    def check_access_time
+      current_hour = Time.now.hour
+      current_min = Time.now.min
+    
+      unless current_hour == 12 || (current_hour == 13 && current_min == 0) # Allows from 12:00 to 12:59 PM
+        redirect_to new_employee_daily_meal_record_path, alert: "You can only access meals between 12:00 PM and 1:00 PM."
+      end
+    end
+    
+ 
 end
 

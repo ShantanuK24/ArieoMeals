@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - arieoMeals</title>
+    <%= stylesheet_link_tag "Feedback", media: "all" %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <%= javascript_importmap_tags %>
+</head>
+<body>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2 class="brand">arieoMeals</h2>
+            <ul class="nav-menu">
+                <li>
+                    <span class="icon"><i class="fas fa-utensils"></i></span> 
+                    <%= link_to "Daily Meals", new_employee_daily_meal_record_path %>
+                </li>
+                <li class="active">
+                    <span class="icon"><i class="fas fa-comments"></i></span> 
+                    <%= link_to "Feedback", new_employee_feedback_path, class: "btn btn-primary" %>
+                </li>
+            </ul>
+            <div class="logout-btn">
+                 <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "logout-btn" %>
+            </div>
+            
+        </div>
+
+        <div class="main-content">
+            <div class="feedback-container">
+                <div class="feedback-header">
+                    <span>
+                        You are not eligible to provide feedback for yesterday's meal 
+                        because you did not select a meal.
+                    </span>
+                    <span class="feedback-date"><%= Date.today.strftime("%B %d, %A %Y") %></span>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
