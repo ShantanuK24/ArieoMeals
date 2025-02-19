@@ -1,32 +1,62 @@
-<h2>Employee Feedbacks</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Page</title>
 
-<%= form_with url: admin_feedbacks_path, method: :get, local: true, id: "filter-feedback-form" do %>
-  <label for="date">Select Date:</label>
-  <%= date_field_tag :date, @date, onchange: "document.getElementById('filter-feedback-form').submit();" %>
-<% end %>
+    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" %>
+    <%= stylesheet_link_tag "admin_feedback", media: "all" %>
+</head>
+<body>
+    <div class="container">
+      <%= render 'shared/admin/sidebar' %>
+        <main class="content">
+          <header class="header">
+            <h2>Employee Feedbacks</h2>
+              <div class="header-controls">
+                <span class="date"><%= Date.today.strftime("%B %d, %A %Y") %></span>
+                <%= form_with url: admin_feedbacks_path, method: :get, local: true do %>
+                    <%= date_field_tag :date, params[:date] || Date.today, onchange: 'this.form.submit();' %>
+                <% end %>
+              </div>
+          </header>
+    
 
-<p>Average Dinner Rating: <%= @average_dinner_rating %></p>
-<p>Average Snack Rating: <%= @average_snack_rating %></p>
-
-<% if @feedbacks.any? %>
-  <table>
-    <tr>
-      <th>Names</th>
-      <th>Comments for Dinner</th>
-      <th>Comments for Snack</th>
-      <th>Rating for Dinner</th>
-      <th>Rating for Snack</th>
-    </tr>
-    <% @feedbacks.each do |feedback| %>
-      <tr>
-        <td><%= feedback.user.name %></td>
-        <td><%= feedback.comments_for_dinner.presence || "N/A" %></td>
-        <td><%= feedback.comments_for_snack.presence || "N/A" %></td>
-        <td><%= feedback.rating_for_dinner.presence || "N/A" %></td>
-        <td><%= feedback.rating_for_snack.presence || "N/A" %></td>
-      </tr>
-    <% end %>
-  </table>
-<% else %>
-  <p>No feedback found for this date.</p>
-<% end %>
+          <section class="feedback-cards">
+            <% @feedbacks.each do |feedback| %>
+              <div class="card">
+                <p><strong>Name:</strong> <%= feedback.user.name %></p>
+                <p><strong>Email:</strong> <%= feedback.user.email %></p>
+                <p><strong>Snacks Rating:</strong> 
+                  <% 5.times do |i| %>
+                    <% if i < feedback.rating_for_snack %>
+                      <span class="star checked">&#9733;</span>
+                    <% else %>
+                      <span class="star">&#9733;</span>
+                    <% end %>
+                  <% end %>
+                </p>
+                <p><strong>Dinner Rating:</strong> 
+                  <% 5.times do |i| %>
+                    <% if i < feedback.rating_for_dinner %>
+                      <span class="star checked">&#9733;</span>
+                    <% else %>
+                      <span class="star">&#9733;</span>
+                    <% end %>
+                  <% end %>
+                </p>
+                <p><strong>Comments:</strong> <%= feedback.comments_for_dinner.truncate(35) %></p>
+                    <div class="comments">
+                        <p><strong>Comments: </strong><%= feedback.comments_for_dinner %></p>
+                    </div>
+                    <button class="view-more">View More</button>
+              </div>
+            <% end %>
+        </section>
+        
+        </main>
+    </div>
+    <%= javascript_include_tag "admin_feedback" %>
+</body>
+</html>

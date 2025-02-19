@@ -1,0 +1,18 @@
+<aside class="sidebar">
+    <h2 class="logo">arieoMeals</h2>
+        <nav>
+            <ul>
+                <li class="nav-btn">
+                    <%= link_to admin_daily_meal_records_path, class: "btn-link" do %>
+                        <i class="fas fa-utensils"></i> Daily Meals Records
+                    <% end %>
+                </li>
+                <li class="nav-btn">
+                    <%= link_to admin_feedbacks_path, class: "btn-link" do %>
+                        <i class="fas fa-comment-dots"></i> Feedback
+                    <% end %>
+                </li>
+            </ul>
+        </nav>
+    <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "logout-btn" %>
+</aside>
