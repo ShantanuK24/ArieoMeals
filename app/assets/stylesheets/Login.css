@@ -6,14 +6,7 @@
 }
 
 body {
-    background: url('Food.jpg') no-repeat center center/cover;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} 
-body {
-    background: image-url('Food.jpg') no-repeat center center/cover;
+    background-image: url("../images/food.jpg");
     height: 100vh;
     display: flex;
     justify-content: center;
