@@ -28,4 +28,10 @@ Admin.create!(
   password_confirmation: "123456",
   type: "Admin"
 )
-puts "Admin user created!"
+# puts "Admin user created!"
+# Admin.create!(
+#   email: "rudrakhokrale@gmail.com",
+#   password: "123456",
+#   password_confirmation: "123456",
+#   type: "Admin"
+# )

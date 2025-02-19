@@ -11,6 +11,8 @@
     <div class="wrapper">
         <div class="glass-box"></div>
         <div class="container">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
             <div class="left-box">
                 <h2 class="brand">arieoMeals</h2>
             </div>
@@ -28,7 +30,7 @@
                     <div class="password-wrapper">
                         <%= f.password_field :password, id: "new-password", placeholder: "Enter your password", required: true, autocomplete: "new-password" %>
                         <button type="button" class="toggle-password" onclick="togglePassword('new-password')">
-                            👁️
+                            👁️‍🗨️
                         </button>
                     </div>
 
@@ -36,7 +38,7 @@
                     <div class="password-wrapper">
                         <%= f.password_field :password_confirmation, id: "confirm-password", placeholder: "Confirm your password", required: true, autocomplete: "new-password" %>
                         <button type="button" class="toggle-password" onclick="togglePassword('confirm-password')">
-                            👁️
+                            👁️‍🗨️
                         </button>
                     </div>
 
