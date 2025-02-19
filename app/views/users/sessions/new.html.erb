@@ -10,14 +10,18 @@
     <div class="wrapper">
         <div class="glass-box"></div>
         <div class="container">
+           
             <div class="left-box">
                 <h2 class="brand">arieoMeals</h2>
             </div>
             <div class="login-box">
+            
                 <h2>Login</h2>
+                <p class="notice"><%= notice %></p>
+                <p class="alert"><%= alert %></p>
                 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                     <label for="email">Email</label>
-                    <%= f.email_field :email, id: "email", placeholder: "Enter your email", required: true %>
+                     <%= f.email_field :email, id: "email", placeholder: "Enter your email", required: true %>
  
                     <label for="password">Password</label>
                     <div class="password-wrapper">
