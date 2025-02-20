@@ -6,7 +6,8 @@ class Employee::FeedbacksController < ApplicationController
     if @daily_meal_record
      @feedback =  Employee::Feedback.new
     else
-      redirect_to no_feedback_employee_feedbacks_path
+      redirect_to new_employee_feedback_path, notice: "You are not eligible to provide feedback for yesterday's meal 
+      because you did not select a meal.!"
     end
   end
   
@@ -35,7 +36,7 @@ class Employee::FeedbacksController < ApplicationController
   end
 
   def feedback_params
-    params.require(:employee_feedback).permit( :rating_for_dinner, :rating_for_snack)
+    params.require(:employee_feedback).permit( :rating_for_snack, :rating_for_dinner, :comments_for_dinner)
   end
 
 end

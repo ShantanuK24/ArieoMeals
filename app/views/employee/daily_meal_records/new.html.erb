@@ -23,34 +23,35 @@
                     <%= link_to "Feedback", new_employee_feedback_path, class: "btn btn-primary" %>
                 </li>
             </ul>
-            <div class="logout-btn">
-                <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "logout-btn" %>
-            </div>
+            <%= button_to destroy_user_session_path, method: :delete, class: "logout-btn" do %>
+                <i class="fas fa-sign-out-alt"></i> Logout
+            <% end %>
         </div>
     </div>
-    <% if flash[:notice] %>
-    <p class="alert alert-success"><%= flash[:notice] %></p>
-  <% end %>
+    
   
     <%= form_with model: @daily_meal_record, url: employee_daily_meal_records_path, method: :post, local: true do |f| %>
         <div class="main-content">
             <h2>Select your availability</h2>
+                <p class="notice"><%= notice %></p>
+                <p class="alert"><%= alert %></p>
             <div class="meal-container">
                 <div class="meal-selection">
                     <div class="meal-item">
                         <%= f.label :snack, "Snack" %>
                         <%= f.select :snack, options_for_select(["Select", "Yes", "No"], @daily_meal_record.snack) %>
                     </div>
-        
                     <div class="meal-item">
-                        <%= f.label :dinner, "Dinner" %>
-                        <%= f.select :dinner, options_for_select(["Select", "Yes", "No"], @daily_meal_record.dinner) %>
+                    <%= f.label :dinner, "Dinner" %>
+                    <%= f.select :dinner, options_for_select(["Select", "Yes", "No"], @daily_meal_record.dinner), {}, { id: "dinner-selection", class: "form-control" } %>
                     </div>
-        
-                    <div class="meal-item">
+                
+                    <!-- Chapati Count - Initially Hidden -->
+                    <div class="meal-item" id="chapati-container" style="display: none;">
                         <%= f.label :chapati_count, "Number of Chapatis" %>
-                        <%= f.select :chapati_count, options_for_select(["Select", 1, 2, 3, 4, 5, 6], @daily_meal_record.chapati_count) %>
+                        <%= f.select :chapati_count, options_for_select(["Select", 1, 2, 3, 4, 5, 6], @daily_meal_record.chapati_count), {}, { id: "chapati-count", class: "form-control" } %>
                     </div>
+                
                 </div>
                 <div class="submit-btn-wrapper">
                      <%= f.submit "Submit", class: "submit-btn" %>
@@ -59,27 +60,26 @@
             </div>
         </div>
     <% end %>
-
+    
     <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const dinnerSelection = document.getElementById("dinner-selection");
-    const chapatiContainer = document.getElementById("chapati-container");
-
-    function toggleChapatiField() {
-      if (dinnerSelection.value === "Yes") {
-        chapatiContainer.style.display = "block";
-      } else {
-        chapatiContainer.style.display = "none";
-      }
-    }
-
-    // Initial check when page loads (in case of pre-filled form)
-    toggleChapatiField();
-
-    // Add event listener to detect changes
-    dinnerSelection.addEventListener("change", toggleChapatiField);
-  });
-</script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dinnerSelection = document.getElementById("dinner-selection");
+            const chapatiContainer = document.getElementById("chapati-container");
+        
+            function toggleChapatiField() {
+                if (dinnerSelection && chapatiContainer) {
+                    chapatiContainer.style.display = dinnerSelection.value === "Yes" ? "block" : "none";
+                }
+            }
+        
+            // Run check on page load (in case of pre-filled form)
+            if (dinnerSelection) {
+                toggleChapatiField();
+                dinnerSelection.addEventListener("change", toggleChapatiField);
+            }
+        });
+        
+    </script>
 
 </body>
 </html>
