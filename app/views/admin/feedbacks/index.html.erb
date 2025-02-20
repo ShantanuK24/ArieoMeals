@@ -11,15 +11,19 @@
 <body>
     <div class="container">
       <%= render 'shared/admin/sidebar' %>
-        <main class="content">
+        <main class="main-content">
           <header class="header">
             <h2>Employee Feedbacks</h2>
-              <div class="header-controls">
-                <span class="date"><%= @date.strftime("%B %d, %A %Y") %></span>
-                <%= form_with url: admin_feedbacks_path, method: :get, local: true do %>
-                    <%= date_field_tag :date, @date, onchange: 'this.form.submit();' %>
-                <% end %>
-              </div>
+            <div class="date">
+            <%= form_with url: admin_feedbacks_path, method: :get, class: "date-form", local: true do |f| %>
+                
+                <span class="selected-date"><%= @date.strftime("%B %d, %A %Y") %></span>
+                <label for="datePicker" class="calendar-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </label>
+                <%= f.date_field :date, value: @date, onchange: "this.form.submit();", class: "date-picker" %>
+            <% end %>
+        </div>
           </header>
 
           <section class="feedback-cards">
@@ -57,6 +61,8 @@
               <p class="no-records-msg">No Feedback records found for this date: <%= @date.strftime("%B %d, %A %Y") %></p>
             <% end %>
           </section>
+        
+          
         </main>
     </div>
     <%= javascript_include_tag "admin_feedback" %>
