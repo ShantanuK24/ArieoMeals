@@ -268,12 +268,15 @@ tr:last-child td {
 }
 
 .meal-filter {
-    padding: 10px;
+
+    width: 120px;
+    height: 40px;
     margin-top: 10px;
     margin-right: 10px;
     font-size: 16px;
     margin-bottom: 15px;
-    align-items: center;
+    text-align: center; /* Center text for most browsers */
+    text-align-last: center;
     justify-content: center;
     background-color: white;
     border: 2px solid orange;
@@ -301,4 +304,16 @@ tr:last-child td {
     color: white;
 }
 
+
+/* empty records */
+.no-records{
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
 

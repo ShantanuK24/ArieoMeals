@@ -33,73 +33,80 @@
                 </div>
             </header>
 
-            <div class="table-container">
-                <!-- Default Table (All Records) -->
-                <div id="default-table">
-                    <table id="mealRecordsTable">
-                        <thead>
+            <% if @meal_records.empty? %>
+  <div class="no-records">
+    <p>No Meal Records found for this date: <%= @date.strftime("%B %d, %A %Y") %></p>
+  </div>
+    <% else %>
+        <div class="table-container">
+            <!-- Default Table (All Records) -->
+            <div id="default-table">
+                <table id="mealRecordsTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Snacks</th>
+                            <th>Dinner</th>
+                            <th>Roti for Dinner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @meal_records.each do |record| %>
                             <tr>
-                                <th>Name</th>
-                                <th>Snacks</th>
-                                <th>Dinner</th>
-                                <th>Roti for Dinner</th>
+                                <td><%= record.user.name %></td>
+                                <td><%= record.snack ? "Yes" : "No" %></td>
+                                <td><%= record.dinner ? "Yes" : "No" %></td>
+                                <td><%= record.chapati_count %></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <% @meal_records.each do |record| %>
-                                <tr>
-                                    <td><%= record.user.name %></td>
-                                    <td><%= record.snack ? "Yes" : "No" %></td>
-                                    <td><%= record.dinner ? "Yes" : "No" %></td>
-                                    <td><%= record.chapati_count %></td>
-                                </tr>
-                            <% end %>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Snacks Table -->
-                <div id="snacks-table" class="hidden">
-                    <table id="snacksTable">
-                        <thead>
-                            <tr>
-                                <th>Sr. No.</th>
-                                <th>Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% @meal_records.select { |record| record.snack }.each_with_index do |record, index| %>
-                                <tr>
-                                    <td><%= index + 1 %></td>
-                                    <td><%= record.user.name %></td>
-                                </tr>
-                            <% end %>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Dinner Table -->
-                <div id="dinner-table" class="hidden">
-                    <table id="dinnerTable">
-                        <thead>
-                            <tr>
-                                <th>Sr. No.</th>
-                                <th>Name</th>
-                                <th>Chapati Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% @meal_records.select { |record| record.dinner }.each_with_index do |record, index| %>
-                                <tr>
-                                    <td><%= index + 1 %></td>
-                                    <td><%= record.user.name %></td>
-                                    <td><%= record.chapati_count %></td>
-                                </tr>
-                            <% end %>
-                        </tbody>
-                    </table>
-                </div>
+                        <% end %>
+                    </tbody>
+                </table>
             </div>
+
+            <!-- Snacks Table -->
+            <div id="snacks-table" class="hidden">
+                <table id="snacksTable">
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @meal_records.select { |record| record.snack }.each_with_index do |record, index| %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td><%= record.user.name %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Dinner Table -->
+            <div id="dinner-table" class="hidden">
+                <table id="dinnerTable">
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Name</th>
+                            <th>Chapati Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @meal_records.select { |record| record.dinner }.each_with_index do |record, index| %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td><%= record.user.name %></td>
+                                <td><%= record.chapati_count %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+<% end %>
+
             <%= link_to admin_daily_meal_records_path(format: :csv), class: "download-btn" do %>
                 <i class="fas fa-download"></i> Download
             <% end %>
