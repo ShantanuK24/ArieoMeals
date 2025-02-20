@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     margin: 0;
     padding: 0;
     background-color: #f7f7f7;
@@ -23,6 +23,13 @@ body {
     flex: 1;
     padding: 20px;
     overflow: hidden; 
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    padding-top: 30px;
+    overflow: hidden;
 }
 
 /* Sidebar Styling */
@@ -54,6 +61,13 @@ body {
     transition: background 0.3s ease;
   }
   
+  .nav-btn.active {
+    background-color: rgb(194, 85, 6); /* Change to your theme color */
+    color: white;
+    border-radius: 5px;
+}
+
+
   .nav-btn:hover {
     background-color: orange; /* Darker shade on hover */
   }
@@ -103,7 +117,7 @@ body {
 
 .sidebar nav ul li i {
     margin-right: 10px;
-    color: orange;
+    color: white;
 }
 
 .sidebar nav ul li:hover {
@@ -141,23 +155,48 @@ body {
 .header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding-top: 20px;
+    
+    padding: 0; /* Remove padding */
+    margin: 0;  /* Remove margin */
 }
+
+.header h2 {
+    margin: 0;
+    padding: 0;
+}
+
 
 .header-controls {
     display: flex;
     align-items: center;
 }
 
+/* Date Picker Section */
 .date {
-    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.date span {
+    font-size: 18px;
+    font-weight: bold;
     margin-right: 10px;
 }
 
+.date-form {
+    display: flex;
+    align-items: center;
+}
+
+.date-picker {
+    border: none;
+    font-size: 16px;
+    padding: 5px;
+}
+
 .calendar-icon {
-    color: #ff5722;
-    font-size: 18px;
+    color:orange;
+    font-size: 20px;
     cursor: pointer;
 }
 
