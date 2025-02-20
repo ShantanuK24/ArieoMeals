@@ -26,7 +26,6 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = "shantanukhokrale14@gmail.com"
   config.sign_in_after_reset_password = false
-  config.mailer = "CustomDeviseMailer"
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 

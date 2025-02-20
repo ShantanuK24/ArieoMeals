@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
   namespace :admin do
-    resources :daily_meal_records, only: [:index] 
- 
-    resources :feedbacks, only: [:index]
+    resources :daily_meal_records, only: [ :index ]
+
+    resources :feedbacks, only: [ :index ]
   end
 
-  get "home/index"
+  # get "home/index"
 
   root "home#index"
-
   get "employees/dashboard"
   get "admins/dashboard"
-  devise_for :users, controllers: { registrations: "users/registrations",
+  devise_for :users, controllers: {  registrations: "users/registrations",
   confirmations: "users/confirmations", sessions: "users/sessions", passwords: "users/passwords" }
 
   authenticate :user, ->(u) { u.admin? } do
