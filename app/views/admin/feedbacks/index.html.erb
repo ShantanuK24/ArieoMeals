@@ -15,46 +15,48 @@
           <header class="header">
             <h2>Employee Feedbacks</h2>
               <div class="header-controls">
-                <span class="date"><%= Date.today.strftime("%B %d, %A %Y") %></span>
+                <span class="date"><%= @date.strftime("%B %d, %A %Y") %></span>
                 <%= form_with url: admin_feedbacks_path, method: :get, local: true do %>
-                    <%= date_field_tag :date, params[:date] || Date.today, onchange: 'this.form.submit();' %>
+                    <%= date_field_tag :date, @date, onchange: 'this.form.submit();' %>
                 <% end %>
               </div>
           </header>
-    
 
           <section class="feedback-cards">
-            <% @feedbacks.each do |feedback| %>
-              <div class="card">
-                <p><strong>Name:</strong> <%= feedback.user.name %></p>
-                <p><strong>Email:</strong> <%= feedback.user.email %></p>
-                <p><strong>Snacks Rating:</strong> 
-                  <% 5.times do |i| %>
-                    <% if i < feedback.rating_for_snack %>
-                      <span class="star checked">&#9733;</span>
-                    <% else %>
-                      <span class="star">&#9733;</span>
+            <% if @feedbacks.present? %>
+              <% @feedbacks.each do |feedback| %>
+                <div class="card">
+                  <p><strong>Name:</strong> <%= feedback.user.name %></p>
+                  <p><strong>Email:</strong> <%= feedback.user.email %></p>
+                  <p><strong>Snacks Rating:</strong> 
+                    <% 5.times do |i| %>
+                      <% if i < feedback.rating_for_snack %>
+                        <span class="star checked">&#9733;</span>
+                      <% else %>
+                        <span class="star">&#9733;</span>
+                      <% end %>
                     <% end %>
-                  <% end %>
-                </p>
-                <p><strong>Dinner Rating:</strong> 
-                  <% 5.times do |i| %>
-                    <% if i < feedback.rating_for_dinner %>
-                      <span class="star checked">&#9733;</span>
-                    <% else %>
-                      <span class="star">&#9733;</span>
+                  </p>
+                  <p><strong>Dinner Rating:</strong> 
+                    <% 5.times do |i| %>
+                      <% if i < feedback.rating_for_dinner %>
+                        <span class="star checked">&#9733;</span>
+                      <% else %>
+                        <span class="star">&#9733;</span>
+                      <% end %>
                     <% end %>
-                  <% end %>
-                </p>
-                <p><strong>Comments:</strong> <%= feedback.comments_for_dinner.truncate(35) %></p>
-                    <div class="comments">
-                        <p><strong>Comments: </strong><%= feedback.comments_for_dinner %></p>
-                    </div>
-                    <button class="view-more">View More</button>
-              </div>
+                  </p>
+                  <p><strong>Comments:</strong> <%= feedback.comments_for_dinner.truncate(35) %></p>
+                  <div class="comments">
+                    <p><strong>Comments: </strong><%= feedback.comments_for_dinner %></p>
+                  </div>
+                  <button class="view-more">View More</button>
+                </div>
+              <% end %>
+            <% else %>
+              <p class="no-records-msg">No Feedback records found for this date: <%= @date.strftime("%B %d, %A %Y") %></p>
             <% end %>
-        </section>
-        
+          </section>
         </main>
     </div>
     <%= javascript_include_tag "admin_feedback" %>
