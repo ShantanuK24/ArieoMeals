@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
     namespace :employee do
-      resources :daily_meal_records, only: [:index, :new, :create]
+      resources :daily_meal_records, only: [:new, :create]
       resources :feedbacks, only: [:new, :create] do
         collection do
           get 'no_feedback' 
@@ -8,9 +8,6 @@ Rails.application.routes.draw do
       end
     end
   
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   namespace :admin do

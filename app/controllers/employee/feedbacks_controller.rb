@@ -2,19 +2,28 @@ class Employee::FeedbacksController < ApplicationController
   before_action :set_daily_meal_record, only: [:new, :create]
 
   def new
-    # feedback for yesterday's meal
-    if @daily_meal_record
-     @feedback =  Employee::Feedback.new
-    else
-      redirect_to new_employee_feedback_path, notice: "You are not eligible to provide feedback for yesterday's meal 
-      because you did not select a meal.!"
-    end
+      # feedback for yesterday's meal
+      if @daily_meal_record
+          if Date.today.monday?
+            # If today is Monday, check for Friday’s record explicitly
+            target_date = Date.today - 3  # Friday
+          else
+            # Otherwise, check for yesterday’s record
+            target_date = Date.yesterday
+          end
+        
+      @daily_meal_record = DailyMealRecord.find_by(user_id: current_user.id, date: target_date)
+      @feedback =  Feedback.new
+      else
+        redirect_to new_employee_daily_meal_record_path, notice: "You are not eligible to provide feedback for yesterday's meal 
+        because you did not select a meal.!"
+      end
   end
   
   def create
-    @feedback = Employee::Feedback.where(created_at: Date.today.all_day, user_id: current_user.id)
+    @feedback = Feedback.where(created_at: Date.today.all_day, user_id: current_user.id)
     unless @feedback.present?
-      @feedback = Employee::Feedback.new(feedback_params)
+      @feedback = Feedback.new(feedback_params)
       @feedback.user = current_user  # the feedback is for yesterday's meal
       
       if @feedback.save
@@ -30,7 +39,7 @@ class Employee::FeedbacksController < ApplicationController
   private
 
   def set_daily_meal_record
-    @daily_meal_record = Employee::DailyMealRecord.find_by(user_id: current_user.id, date: Date.yesterday)
+    @daily_meal_record = DailyMealRecord.find_by(user_id: current_user.id, date: Date.yesterday)
     
     return false unless @daily_meal_record.present?
   end
