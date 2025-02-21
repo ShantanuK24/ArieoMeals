@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  # Devise modules
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   #  :confirmable
@@ -11,7 +11,8 @@ class User < ApplicationRecord
   after_initialize :set_default_type, if: :new_record?
   # before_create :auto_confirm_admin
 
-  # private
+    # Associations
+    has_many :daily_meal_records, class_name: 'Employee::DailyMealRecord', dependent: :destroy
 
   def admin?
     type == "Admin"
