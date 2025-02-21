@@ -12,7 +12,7 @@ class User < ApplicationRecord
   # before_create :auto_confirm_admin
 
     # Associations
-    has_many :daily_meal_records, class_name: 'Employee::DailyMealRecord', dependent: :destroy
+    has_many :daily_meal_records#, class_name: 'Employee::DailyMealRecord', dependent: :destroy
 
   def admin?
     type == "Admin"

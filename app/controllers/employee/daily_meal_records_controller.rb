@@ -1,10 +1,10 @@
 class Employee::DailyMealRecordsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :check_access_time, only: [:create] # Restrict access based on time
+  #before_action :check_access_time, only: [:create] # Restrict access based on time
     # GET /daily_meal_records/new
     def new
-         @daily_meal_record = Employee::DailyMealRecord.new
+         @daily_meal_record = DailyMealRecord.new
     end
   
     # POST /daily_meal_records
@@ -24,14 +24,10 @@ class Employee::DailyMealRecordsController < ApplicationController
       end
     end
 
-    def index
-      @daily_meal_records = DailyMealRecord.all
-    end
-
     private
     # Strong parameters
     def meal_params
-      params.require(:employee_daily_meal_record).permit(:date, :snack, :dinner, :chapati_count)
+      params.require(:daily_meal_record).permit(:date, :snack, :dinner, :chapati_count)
     end
     
     def check_duplicate_record
