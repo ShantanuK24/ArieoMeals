@@ -1,5 +1,5 @@
 class Employee::FeedbacksController < ApplicationController
-  before_action :set_daily_meal_record, only: [:new, :create]
+  before_action :set_daily_meal_record, only: [ :new, :create ]
 
   def new
       # feedback for yesterday's meal
@@ -19,13 +19,13 @@ class Employee::FeedbacksController < ApplicationController
         redirect_to new_employee_daily_meal_record_path, notice: "You are not eligible to provide feedback for #{day_label} meal because you did not select a meal!"
       end
   end
-  
+
   def create
     @feedback = Feedback.where(created_at: Date.today.all_day, user_id: current_user.id)
     unless @feedback.present?
       @feedback = Feedback.new(feedback_params)
       @feedback.user = current_user  # the feedback is for yesterday's meal
-      
+
       if @feedback.save
         redirect_to new_employee_feedback_path, notice: "Thank you for your feedback!"
       else
@@ -35,7 +35,7 @@ class Employee::FeedbacksController < ApplicationController
       redirect_to new_employee_feedback_path, notice: "Feedback already submitted"
     end
   end
-  
+
   private
 
   def set_daily_meal_record
@@ -54,5 +54,4 @@ class Employee::FeedbacksController < ApplicationController
   def feedback_params
     params.require(:feedback).permit( :rating_for_snack, :rating_for_dinner, :comments_for_dinner)
   end
-
 end
