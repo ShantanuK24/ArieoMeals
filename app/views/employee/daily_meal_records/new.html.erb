@@ -33,18 +33,19 @@
     <%= form_with model: @daily_meal_record, url: employee_daily_meal_records_path, method: :post, local: true do |f| %>
         <div class="main-content">
             <h2>Select your availability</h2>
-                <p>Welcome, <%= current_user.email %>!</p>
-                <p class="notice"><%= notice %></p>
-                <p class="alert"><%= alert %></p>
+            <p style="color: blue;">Welcome, <%= current_user.name %>!</p>
+            <p class="notice" style="color: green;"><%= notice %></p>
+            <p class="alert" style="color: red;"><%= alert %></p>
+            
             <div class="meal-container">
                 <div class="meal-selection">
                     <div class="meal-item">
                         <%= f.label :snack, "Snack" %>
-                        <%= f.select :snack, options_for_select(["Select", "Yes", "No"], @daily_meal_record.snack) %>
-                    </div>
+                        <%= f.select :snack, options_for_select([["Select", nil], ["Yes", true], ["No", false]], @daily_meal_record.snack), {}, { class: "form-control" } %>
+                        </div>
                     <div class="meal-item">
                     <%= f.label :dinner, "Dinner" %>
-                    <%= f.select :dinner, options_for_select(["Select", "Yes", "No"], @daily_meal_record.dinner), {}, { id: "dinner-selection", class: "form-control" } %>
+                    <%= f.select :dinner, options_for_select([["Select", nil], ["Yes", true], ["No", false]], @daily_meal_record.dinner), {}, { id: "dinner-selection", class: "form-control" } %>
                     </div>
                 
                     <!-- Chapati Count - Initially Hidden -->
@@ -69,7 +70,7 @@
         
             function toggleChapatiField() {
                 if (dinnerSelection && chapatiContainer) {
-                    chapatiContainer.style.display = dinnerSelection.value === "Yes" ? "block" : "none";
+                    chapatiContainer.style.display = dinnerSelection.value === "true" ? "block" : "none";
                 }
             }
         
