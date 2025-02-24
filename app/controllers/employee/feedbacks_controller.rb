@@ -15,8 +15,8 @@ class Employee::FeedbacksController < ApplicationController
       @daily_meal_record = DailyMealRecord.find_by(user_id: current_user.id, date: target_date)
       @feedback =  Feedback.new
       else
-        redirect_to new_employee_daily_meal_record_path, notice: "You are not eligible to provide feedback for yesterday's meal 
-        because you did not select a meal.!"
+        day_label = Date.today.monday? ? "Friday's" : "yesterday's"
+        redirect_to new_employee_daily_meal_record_path, notice: "You are not eligible to provide feedback for #{day_label} meal because you did not select a meal!"
       end
   end
 
@@ -39,12 +39,19 @@ class Employee::FeedbacksController < ApplicationController
   private
 
   def set_daily_meal_record
-    @daily_meal_record = DailyMealRecord.find_by(user_id: current_user.id, date: Date.yesterday)
-    
-    return false unless @daily_meal_record.present?
+  target_date = Date.yesterday
+
+  if Date.today.monday?
+  target_date = Date.today - 3  # Fetch Friday's record explicitly
   end
 
+  @daily_meal_record = DailyMealRecord.find_by(user_id: current_user.id, date: target_date)
+
+  return false unless @daily_meal_record.present?
+  end
+
+
   def feedback_params
-    params.require(:employee_feedback).permit(:rating_for_snack, :rating_for_dinner, :comments_for_dinner)
+    params.require(:feedback).permit( :rating_for_snack, :rating_for_dinner, :comments_for_dinner)
   end
 end

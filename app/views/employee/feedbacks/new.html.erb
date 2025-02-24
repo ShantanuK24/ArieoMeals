@@ -30,9 +30,10 @@
 
         <div class="main-content">
             <h2>Your feedback matters</h2>
-                <p>Welcome, <%= current_user.email %>!</p>
-                <p class="notice"><%= notice %></p>
-                <p class="alert"><%= alert %></p>
+            <p style="color: blue;">Welcome, <%= current_user.name %>!</p>
+            <p class="notice" style="color: green;"><%= notice %></p>
+            <p class="alert" style="color: red;"><%= alert %></p>
+            
             <div class="feedback-container">
                 <div class="feedback-header">
                     <span>Give your feedback</span>
