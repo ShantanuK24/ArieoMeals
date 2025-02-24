@@ -2,8 +2,8 @@ class EmployeesController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_employee
 
-  def dashboard
-  end
+  # def dashboard
+  # end
 
   private
 

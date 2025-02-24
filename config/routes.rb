@@ -1,16 +1,26 @@
 Rails.application.routes.draw do
+    root "home#index"
+
+    devise_for :users, controllers:
+    {
+      registrations: "users/registrations",
+      confirmations: "users/confirmations",
+      sessions: "users/sessions",
+      passwords: "users/passwords"
+    }
+
     namespace :employee do
-      resources :daily_meal_records, only: [:index, :new, :create]
-      resources :feedbacks, only: [:new, :create] do
+      resources :daily_meal_records, only: [ :index, :new, :create ]
+      resources :feedbacks, only: [ :new, :create ] do
         collection do
-          get 'no_feedback' 
+          get "no_feedback"
         end
       end
     end
-  
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
+
+  # devise_for :users, controllers: {
+  #   sessions: 'users/sessions'
+  # }
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   namespace :admin do
@@ -19,11 +29,9 @@ Rails.application.routes.draw do
     resources :feedbacks, only: [ :index ]
   end
 
-  root "home#index"
   get "employees/dashboard"
   get "admins/dashboard"
-  devise_for :users, controllers: {  registrations: "users/registrations",
-  confirmations: "users/confirmations", sessions: "users/sessions", passwords: "users/passwords" }
+
 
   authenticate :user, ->(u) { u.admin? } do
     get "admin_dashboard", to: "admins#dashboard"
