@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     if resource.admin?
       admin_daily_meal_records_path # Redirect to /admin/daily_meal_records
     elsif resource.employee?
-      employee_daily_meal_records_path
+      new_employee_daily_meal_record_path
     else
       root_path
     end

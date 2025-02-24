@@ -33,6 +33,7 @@
     <%= form_with model: @daily_meal_record, url: employee_daily_meal_records_path, method: :post, local: true do |f| %>
         <div class="main-content">
             <h2>Select your availability</h2>
+                <p>Welcome, <%= current_user.email %>!</p>
                 <p class="notice"><%= notice %></p>
                 <p class="alert"><%= alert %></p>
             <div class="meal-container">
