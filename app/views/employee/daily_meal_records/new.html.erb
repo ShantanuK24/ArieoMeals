@@ -53,11 +53,10 @@
                         <%= f.label :chapati_count, "Number of Chapatis" %>
                         <%= f.select :chapati_count, options_for_select([["Select"], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6]], @daily_meal_record.chapati_count), {}, { id: "chapati-count", class: "form-control" } %>
                     </div>
-                </div>
 
-                
-                <div class="submit-btn-wrapper">
-                     <%= f.submit "Submit", class: "submit-btn" %>
+                    <div class="submit-btn-wrapper">
+                        <%= f.submit "Submit", class: "submit-btn" %>
+                    </div>
                 </div>
             </div>
 
