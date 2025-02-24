@@ -1,9 +1,9 @@
 class Employee::DailyMealRecordsController < ApplicationController
   before_action :authenticate_user!
-  #before_action :check_access_time, only: [:create] # Restrict access based on time
+    # before_action :check_access_time, only: [:create] # Restrict access based on time
     # GET /daily_meal_records/new
     def new
-         @daily_meal_record = DailyMealRecord.new
+      @daily_meal_record = DailyMealRecord.new
     end
 
     # POST /daily_meal_records

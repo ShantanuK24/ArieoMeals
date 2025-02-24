@@ -40,26 +40,31 @@
                 <div class="meal-selection">
                     <div class="meal-item">
                         <%= f.label :snack, "Snack" %>
-                        <%= f.select :snack, options_for_select(["Select", "Yes", "No"], @daily_meal_record.snack) %>
+                        <%= f.select :snack, options_for_select([["Select"], ["Yes",true], ["No",false]], @daily_meal_record.snack) %>
                     </div>
                     <div class="meal-item">
                     <%= f.label :dinner, "Dinner" %>
-                    <%= f.select :dinner, options_for_select(["Select", "Yes", "No"], @daily_meal_record.dinner), {}, { id: "dinner-selection", class: "form-control" } %>
+                    <%= f.select :dinner, options_for_select([["Select"], ["Yes",true], ["No",false]], @daily_meal_record.dinner), {}, { id: "dinner-selection", class: "form-control" } %>
                     </div>
                 
                     <!-- Chapati Count - Initially Hidden -->
                     <div class="meal-item" id="chapati-container" style="display: none;">
                         <%= f.label :chapati_count, "Number of Chapatis" %>
-                        <%= f.select :chapati_count, options_for_select(["Select", 1, 2, 3, 4, 5, 6], @daily_meal_record.chapati_count), {}, { id: "chapati-count", class: "form-control" } %>
+                        <%= f.select :chapati_count, options_for_select([["Select"], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6]], @daily_meal_record.chapati_count), {}, { id: "chapati-count", class: "form-control" } %>
                     </div>
-                
                 </div>
+
+                
                 <div class="submit-btn-wrapper">
                      <%= f.submit "Submit", class: "submit-btn" %>
                 </div>
+            </div>
 
             </div>
-        </div>
+    </div>
+
+
+    </div>
     <% end %>
     
     <script>
@@ -84,4 +89,5 @@
 
 </body>
 </html>
+
 
