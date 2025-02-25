@@ -34,7 +34,7 @@
 
                     <!-- Chapati Count - Initially Hidden -->
                     <div class="meal-item" id="chapati-container" style="display: none;">
-                        <%= f.label :chapati_count, "Number of Chapatis" %>
+                        <%= f.label :chapati_count, "Number of Chapatis" %><br>
                         <%= f.select :chapati_count, options_for_select([["Select"], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6]], @daily_meal_record.chapati_count), {}, { id: "chapati-count", class: "form-control" } %>
                     </div>
                 </div>
