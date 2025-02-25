@@ -1,8 +1,11 @@
-<%= stylesheet_link_tag "application", media: "all" %>
+<%= stylesheet_link_tag "forget_password", media: "all" %>
+<body style="background: url('<%= asset_path('food.jpg') %>') no-repeat center center/cover;">
 
 <div class="wrapper">
     <div class="glass-box"></div>
     <div class="container">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
         <div class="left-box">
             <h2 class="brand">arieoMeals</h2>
         </div>

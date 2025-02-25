@@ -1,9 +1,18 @@
 class User < ApplicationRecord
-  # Devise modules
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   #  :confirmable
 
+
+  validate :password_check
+
+  def password_check
+    if password.present?
+      unless password.match?(/\A(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+\z/)
+        errors.add(:password, "must include at least one uppercase letter, one digit, and one special character")
+      end
+    end
+  end
   # Single Table Inheritance
   self.inheritance_column = :type
 
@@ -11,7 +20,8 @@ class User < ApplicationRecord
   after_initialize :set_default_type, if: :new_record?
   # before_create :auto_confirm_admin
 
-  # private
+  # Associations
+  has_many :daily_meal_records# , class_name: 'Employee::DailyMealRecord', dependent: :destroy
 
   def admin?
     type == "Admin"

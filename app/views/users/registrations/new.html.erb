@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - arieoMeals</title>
-    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= stylesheet_link_tag "register", media: "all" %>
 </head>
 <body>
+    <body style="background: url('<%= asset_path('food.jpg') %>') no-repeat center center/cover;">
+
     <div class="wrapper">
         <div class="glass-box"></div>
         <div class="container">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
             <div class="left-box">
                 <h2 class="brand">arieoMeals</h2>
             </div>
@@ -18,7 +22,7 @@
                 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
                     <%= render "users/shared/error_messages", resource: resource %>
                      <label for="name">Name</label>
-                    <%= f.text_field :email, id: "name", placeholder: "Enter your Name", required: true %>
+                    <%= f.text_field :name, id: "name", placeholder: "Enter your Name", required: true %>
 
                     <label for="email">Email</label>
                     <%= f.email_field :email, id: "email", placeholder: "Enter your email", required: true %>

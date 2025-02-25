@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if resource.save
         yield resource if block_given?
         set_flash_message! :notice, :signed_up
-        redirect_to new_user_session_path 
+        redirect_to new_user_session_path
       else
         clean_up_passwords resource
         set_minimum_password_length
@@ -28,6 +28,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # def after_sign_up_path_for(resource)
     #   new_user_session_path # Redirects to login page after sign-up
     # end
+
 
 
 

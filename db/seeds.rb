@@ -15,17 +15,23 @@
 # )
 
 
+Admin.create!(
+  email: "shanA@gmail.com",
+  password: "Pass@123",
+  password_confirmation: "Pass@123",
+  type: "Admin"
+)
+# puts "Admin user created!"
 # Admin.create!(
-#   email: "shanA@gmail.com",
+#   email: "ajay@gmail.com",
 #   password: "123456",
 #   password_confirmation: "123456",
 #   type: "Admin"
 # )
-puts "Admin user created!"
-Admin.create!(
-  email: "ajay@gmail.com",
-  password: "123456",
-  password_confirmation: "123456",
-  type: "Admin"
-)
-puts "Admin user created!"
+# puts "Admin user created!"
+# Admin.create!(
+#   email: "rudrakhokrale@gmail.com",
+#   password: "123456",
+#   password_confirmation: "123456",
+#   type: "Admin"
+# )
