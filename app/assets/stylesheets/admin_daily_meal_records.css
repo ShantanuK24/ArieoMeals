@@ -49,7 +49,7 @@ body {
   }
   
   .nav-btn:hover {
-    background-color: orange; /* Darker shade on hover */
+    background-color: rgb(194, 85, 6); /* Darker shade on hover */
   }
   
   .btn-link {
@@ -273,6 +273,12 @@ tr:last-child td {
 
 .download-btn i {
     margin-right: 5px;
+}
+
+.download-btn.disabled {
+    pointer-events: none; /* Prevents clicking */
+    opacity: 0.6; /* Makes it look disabled */
+    cursor: not-allowed;
 }
 
 /* table toggle css */

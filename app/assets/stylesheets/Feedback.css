@@ -1,3 +1,4 @@
+/* Reset Styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,145 +7,173 @@
 }
 
 body {
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+/* Main Layout */
+.container {
     display: flex;
     height: 100vh;
-    background-color: #f8f8f8;
 }
 
+/* Sidebar */
 .sidebar {
-    width: 250px;
-    background: #000;
+    width: 270px;
+    background-color: black;
     color: white;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    padding: 20px;
+    justify-content: space-between;
     position: fixed;
-    height: 100vh; 
+    left: 0;
+    top: 0;
 }
 
-.brand {
-    font-size: 24px;
+/* Sidebar Logo */
+.sidebar .logo {
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 30px 0;
 }
 
-.nav-menu {
-    list-style: none;
-    margin-top: 20px;
+/* Sidebar Navigation */
+.sidebar nav {
+    flex-grow: 1;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
     padding: 0;
 }
 
-.nav-menu li {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    padding: 12px;
+.sidebar nav ul li {
+    margin-bottom: 10px;
+    padding: 5px 10px;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    margin-top: 20px;
 }
 
-.nav-menu li .icon {
-    margin-right: 10px;
-    font-size: 18px;
-    vertical-align: middle;
-}
-
-.nav-menu li.active,
-.nav-menu li:hover {
-    background: #b0451b;
-    color: white;
-}
-
-.nav-menu li a {
-    color: white !important; 
+.sidebar nav ul li a {
     text-decoration: none;
-    font-weight: bold;
-}
-
-.nav-menu li a:hover {
-    color: #f04e23; 
-}
-
-.logout-btn {
+    color: white;
+    font-size: 16px;
     display: flex;
     align-items: center;
-    gap: 8px; /* Space between icon and text */
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-}
- 
-.logout-btn i {
-    font-size: 16px;
 }
 
+.sidebar nav ul li i {
+    margin-right: 10px;
+    color: white;
+}
+
+.sidebar nav ul li:hover {
+    background-color: rgb(194, 85, 6);
+}
+
+/* Sidebar Buttons */
+.nav-btn {
+    display: block;
+    margin: 10px 0;
+    background-color: black;
+    transition: background 0.3s ease;
+}
+
+.nav-btn.active {
+    background-color: rgb(194, 85, 6);
+    color: white;
+    border-radius: 5px;
+}
+
+.nav-btn:hover {
+    background-color: rgb(194, 85, 6);
+}
+
+.btn-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+}
+
+/* Logout Button */
+.logout-btn {
+    background-color: #ff5722;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 250px;
+    margin: 20px auto;
+}
+
+.logout-btn:hover {
+    background-color: #e64a19;
+}
+
+/* Main Content */
 .main-content {
     margin-left: 270px;
-    flex: 1;
-    padding: 10px;
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
 }
 
-.main-content h2 {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-
+/* Feedback Section */
 .feedback-container {
-    border: 3px solid #dbdee0; 
+    border: 3px solid #dbdee0;
     border-radius: 10px;
     padding: 25px;
     width: 920px;
-    height: 550px;
     background: white;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow */
+    position: relative;
+    margin: 20px auto;
 }
 
+/* Feedback Header */
 .feedback-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
+/* Feedback Date */
 .feedback-date {
     color: #f04e23;
     font-size: 16px;
 }
 
-
+/* Comment Section */
 .comment-section {
     display: flex;
-    flex-direction: column;  
+    flex-direction: column;
     gap: 8px;
-    font-weight: bold;  
+    font-weight: bold;
     text-align: left;
     padding-top: 10px;
-    margin-top: -50px;
     align-items: center;
 }
 
+/* Submit Button */
 .submit-btn-wrapper {
     margin-top: 20px;
-    align-self: flex-start; 
+    text-align: center;
 }
 
 .submit-btn {
-    position: fixed;
-    bottom: 70px;
-    right: 110px;
     background-color: #f04e23;
     border: none;
     padding: 10px 20px;
@@ -161,22 +190,23 @@ body {
     transform: scale(1.05);
 }
 
+/* Textarea */
 .comment-section textarea {
-    width: 450px; 
-    height: 150px; 
+    width: 450px;
+    height: 150px;
     padding: 10px;
-    border: 2px solid #ff5722; 
+    border: 2px solid #ff5722;
     border-radius: 5px;
     font-size: 16px;
-    resize: none; 
-    outline: none; 
+    resize: none;
+    outline: none;
 }
 
+/* Rating Section */
 .rating-section {
     display: flex;
     justify-content: space-evenly;
-    margin-bottom: 100px;
-    margin-top: 30px;
+    margin: 30px 0;
 }
 
 .rating-item {
@@ -185,24 +215,7 @@ body {
     align-items: center;
 }
 
-.rating-label {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.stars {
-    font-size: 30px;
-    color: orange;
-    font-weight: bold;
-    margin-left: 10px;
-}
-
-.stars i {
-    cursor: pointer;
-}
-
+/* Rating Stars */
 .stars {
     font-size: 30px;
     color: orange;
@@ -214,21 +227,57 @@ body {
 .stars .star {
     padding: 5px;
     transition: color 0.2s ease-in-out;
-    position: relative;
 }
 
 .stars .checked {
-    color: orange; /* Full star color */
+    color: orange;
 }
 
-.stars .checked-half {
-    color: orange;
-    position: relative;
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .feedback-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .comment-section textarea {
+        width: 100%;
+    }
 }
 
-.stars .checked-half::after {
-    content: "\00BD"; /* Unicode for half-star */
-    position: absolute;
-    left: 0;
-    color: orange;
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+    }
+
+    .feedback-container {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar {
+        width: 180px;
+    }
+
+    .main-content {
+        margin-left: 180px;
+        padding: 10px;
+    }
+
+    .feedback-container {
+        width: 100%;
+    }
+
+    .comment-section textarea {
+        width: 100%;
+    }
+
+    .submit-btn {
+        width: 100%;
+    }
 }
