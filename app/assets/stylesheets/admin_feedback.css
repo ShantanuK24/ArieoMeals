@@ -69,7 +69,7 @@ body {
 
 
   .nav-btn:hover {
-    background-color: orange; /* Darker shade on hover */
+    background-color: rgb(194, 85, 6); /* Darker shade on hover */
   }
   
   .btn-link {
@@ -117,11 +117,11 @@ body {
 
 .sidebar nav ul li i {
     margin-right: 10px;
-    color: white;
+    color: orange;
 }
 
 .sidebar nav ul li:hover {
-    background-color: #b65026;
+    background-color: rgb(194, 85, 6);
 }
 
 /* Logout Button */

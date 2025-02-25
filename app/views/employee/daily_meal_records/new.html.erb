@@ -11,83 +11,60 @@
 <body>
 
     <div class="container">
-        <div class="sidebar">
-            <h2 class="brand">arieoMeals</h2>
-            <ul class="nav-menu">
-                <li class="active">
-                    <span class="icon"><i class="fas fa-utensils"></i></span> 
-                    <%= link_to "Daily Meals", new_employee_daily_meal_record_path %>
-                </li>
-                <li>
-                    <span class="icon"><i class="fas fa-comments"></i></span> 
-                    <%= link_to "Feedback", new_employee_feedback_path, class: "btn btn-primary" %>
-                </li>
-            </ul>
-            <%= button_to destroy_user_session_path, method: :delete, class: "logout-btn" do %>
-                <i class="fas fa-sign-out-alt"></i> Logout
-            <% end %>
-        </div>
+        <%= render 'shared/employee/sidebar' %>
     </div>
-    
-  
-    <%= form_with model: @daily_meal_record, url: employee_daily_meal_records_path, method: :post, local: true do |f| %>
-        <div class="main-content">
-            <h2>Select your availability</h2>
-            <p style="color: blue;">Welcome, <%= current_user.name %>!</p>
-            <p class="notice" style="color: green;"><%= notice %></p>
-            <p class="alert" style="color: red;"><%= alert %></p>
-            
+
+    <div class="main-content">
+        <h2>Select your availability</h2>
+        <p style="color: blue;">Welcome, <%= current_user.name %>!</p>
+        <p class="notice" style="color: green;"><%= notice %></p>
+        <p class="alert" style="color: red;"><%= alert %></p>
+
+        <%= form_with model: @daily_meal_record, url: employee_daily_meal_records_path, method: :post, local: true do |f| %>
             <div class="meal-container">
                 <div class="meal-selection">
                     <div class="meal-item">
                         <%= f.label :snack, "Snack" %>
                         <%= f.select :snack, options_for_select([["Select", nil], ["Yes", true], ["No", false]], @daily_meal_record.snack), {}, { class: "form-control" } %>
-                        </div>
-                    <div class="meal-item">
-                    <%= f.label :dinner, "Dinner" %>
-                    <%= f.select :dinner, options_for_select([["Select", nil], ["Yes", true], ["No", false]], @daily_meal_record.dinner), {}, { id: "dinner-selection", class: "form-control" } %>
                     </div>
-                
+                    <div class="meal-item">
+                        <%= f.label :dinner, "Dinner" %>
+                        <%= f.select :dinner, options_for_select([["Select", nil], ["Yes", true], ["No", false]], @daily_meal_record.dinner), {}, { id: "dinner-selection", class: "form-control" } %>
+                    </div>
+
                     <!-- Chapati Count - Initially Hidden -->
                     <div class="meal-item" id="chapati-container" style="display: none;">
                         <%= f.label :chapati_count, "Number of Chapatis" %>
                         <%= f.select :chapati_count, options_for_select([["Select"], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6]], @daily_meal_record.chapati_count), {}, { id: "chapati-count", class: "form-control" } %>
                     </div>
+                </div>
 
-                    <div class="submit-btn-wrapper">
-                        <%= f.submit "Submit", class: "submit-btn" %>
-                    </div>
+                <!-- Submit Button Inside Meal Container -->
+                <div class="submit-btn-wrapper">
+                    <%= f.submit "Submit", class: "submit-btn" %>
                 </div>
             </div>
-
-            </div>
+        <% end %>
     </div>
 
-
-    </div>
-    <% end %>
-    
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const dinnerSelection = document.getElementById("dinner-selection");
             const chapatiContainer = document.getElementById("chapati-container");
-        
+
             function toggleChapatiField() {
                 if (dinnerSelection && chapatiContainer) {
                     chapatiContainer.style.display = dinnerSelection.value === "true" ? "block" : "none";
                 }
             }
-        
+
             // Run check on page load (in case of pre-filled form)
             if (dinnerSelection) {
                 toggleChapatiField();
                 dinnerSelection.addEventListener("change", toggleChapatiField);
             }
         });
-        
     </script>
 
 </body>
 </html>
-
-

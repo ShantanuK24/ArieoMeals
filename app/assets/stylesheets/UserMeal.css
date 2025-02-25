@@ -11,83 +11,109 @@ body {
     background-color: #f8f8f8;
 }
 
+
+/* Sidebar */
 .sidebar {
-    width: 250px;
-    background: #000;
+    width: 270px;
+    background-color: black;
     color: white;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    padding: 20px;
+    justify-content: space-between;
     position: fixed;
-    height: 100vh; 
+    left: 0;
+    top: 0;
 }
 
-.brand {
-    font-size: 24px;
+/* Sidebar Logo */
+.sidebar .logo {
+    font-size: 30px;
     font-weight: bold;
-    text-align: left;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    margin: 30px 0;
 }
 
-.nav-menu {
-    list-style: none;
-    margin-top: 20px;
+/* Sidebar Navigation */
+.sidebar nav {
+    flex-grow: 1;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
     padding: 0;
 }
 
-.nav-menu li {
+.sidebar nav ul li {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
     display: flex;
     align-items: center;
-    font-size: 16px;
-    padding: 12px;
-    border-radius: 5px;
-    cursor: pointer;
+}
+
+.sidebar nav ul li i {
+    margin-right: 10px;
+    color: orange;
+}
+
+.sidebar nav ul li:hover {
+    background-color: rgb(194, 85, 6);
+}
+
+/* Sidebar Buttons */
+.nav-btn {
+    display: block;
+    margin: 10px 0;
+    background-color: black;
     transition: background 0.3s ease;
 }
 
-.nav-menu li .icon {
-    margin-right: 10px;
-    font-size: 18px;
-    vertical-align: middle;
-}
-
-.nav-menu li.active,
-.nav-menu li:hover {
-    background: #b0451b;
+.nav-btn.active {
+    background-color: rgb(194, 85, 6);
     color: white;
+    border-radius: 5px;
 }
 
-.nav-menu li a {
-    color: white !important; 
+.nav-btn:hover {
+    background-color: rgb(194, 85, 6);
+}
+
+.btn-link {
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    font-weight: bold;
-}
-
-.nav-menu li a:hover {
-    color: #f04e23; 
-}
-
-
-.logout-btn {
-    background: #ff6600;
-    border: none;
     color: white;
-    padding: 12px;
+    padding: 12px 20px;
     font-size: 16px;
-    border-radius: 10px;
-    width: 100%;
-    cursor: pointer;
     font-weight: bold;
+    width: 100%;
+}
+
+/* Logout Button */
+.logout-btn {
+    background-color: #ff5722;
+    color: white;
+    padding: 10px;
     text-align: center;
-    margin-top: auto;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 250px;
+    margin: 20px auto;
 }
 
 .logout-btn:hover {
-    background: #e65c00;
+    background-color: #e64a19;
 }
+
 
 .main-content {
     margin-left: 270px;
@@ -107,11 +133,13 @@ body {
     border-radius: 10px;
     padding: 20px;
     margin-top: 10px;
-    width: 920px;
+    width: 1150px;
     height: 530px;
     display: flex;
     flex-direction: column;
     align-items: flex-start; 
+    background: white;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow */
 }
 
 .meal-selection {
@@ -144,16 +172,18 @@ select {
     cursor: pointer;
     outline: none;
 }
+.meal-container {
+    position: relative; /* Establish positioning context */
+    padding-bottom: 60px; /* Ensure space for button */
+}
 
 .submit-btn-wrapper {
-    margin-top: 20px;
-    align-self: flex-start; 
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }
 
 .submit-btn {
-    position: fixed;
-    bottom: 80px;
-    right: 60px;
     background-color: #f04e23;
     border: none;
     padding: 10px 20px;
@@ -169,3 +199,5 @@ select {
     background: #e65c00;
     transform: scale(1.05);
 }
+
+
