@@ -11,23 +11,10 @@
 <body>
 
     <div class="container">
-        <div class="sidebar">
-            <h2 class="brand">arieoMeals</h2>
-            <ul class="nav-menu">
-                <li>
-                    <span class="icon"><i class="fas fa-utensils"></i></span> 
-                    <%= link_to "Daily Meals", new_employee_daily_meal_record_path %>
-                </li>
-                <li class="active">
-                    <span class="icon"><i class="fas fa-comments"></i></span> 
-                    <%= link_to "Feedback", new_employee_feedback_path, class: "btn btn-primary" %>
-                </li>
-            </ul>
-            <%= button_to destroy_user_session_path, method: :delete, class: "logout-btn" do %>
-                <i class="fas fa-sign-out-alt"></i> Logout
-            <% end %>
+        <div>
+            <%= render 'shared/employee/sidebar' %>
         </div>
-
+        
         <div class="main-content">
             <h2>Your feedback matters</h2>
             <p style="color: blue;">Welcome, <%= current_user.name %>!</p>

@@ -107,9 +107,10 @@
         </div>
 <% end %>
 
-            <%= link_to admin_daily_meal_records_path(format: :csv), class: "download-btn" do %>
-                <i class="fas fa-download"></i> Download
-            <% end %>
+        <%= link_to admin_daily_meal_records_path(format: :csv), class: "download-btn disabled", tabindex: -1, onclick: "return false;" do %>
+            <i class="fas fa-download"></i> Download
+        <% end %>
+
         </main>
     </div>
 

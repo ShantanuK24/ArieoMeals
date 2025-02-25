@@ -1,7 +1,7 @@
 class Admin::FeedbacksController < ApplicationController
     before_action :authorize_admin
     def index
-      @date = params[:date].present? ? Date.parse(params[:date]) : Date.yesterday
+      @date = params[:date].present? ? Date.parse(params[:date]) : Date.today 
 
       @feedbacks = Feedback.joins(:user).where(created_at: @date.all_day)
 
