@@ -10,10 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       build_resource(sign_up_params)
 
       if resource.save
-        # Explicitly prevent auto-login
         yield resource if block_given?
         set_flash_message! :notice, :signed_up
-        redirect_to new_user_session_path # Redirect to login page
+        redirect_to new_user_session_path 
       else
         clean_up_passwords resource
         set_minimum_password_length
