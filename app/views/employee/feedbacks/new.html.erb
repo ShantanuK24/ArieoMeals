@@ -80,15 +80,15 @@ document.addEventListener("DOMContentLoaded", function () {
             stars.forEach((star, index) => {
                 star.addEventListener("click", function (event) {
                     let clickPosition = event.offsetX / star.offsetWidth;
-                    let isHalf = clickPosition < 0.5;
-                    let newRating = index + (isHalf ? 0.5 : 1);
+                    let isHalf = clickPosition < 1;
+                    let newRating = index + 1;
 
                     hiddenInput.value = newRating; // Store float value (e.g., 3.5)
                     updateStars(stars, newRating);
                 });
 
                 star.addEventListener("mouseover", function (event) {
-                    let hoverIndex = index + (event.offsetX < star.offsetWidth / 2 ? 0.5 : 1);
+                    let hoverIndex = index + (event.offsetX < star.offsetWidth / 2 ? 1 : 1);
                     updateStars(stars, hoverIndex);
                 });
 
