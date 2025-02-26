@@ -20,7 +20,7 @@ body {
 
 /* Sidebar */
 .sidebar {
-    width: 270px;
+    width: 300px;
     background-color: black;
     color: white;
     height: 100vh;
@@ -113,7 +113,10 @@ body {
     font-size: 16px;
     border-radius: 5px;
     width: 250px;
-    margin: 20px auto;
+    margin-left: 20px;
+    margin-top: auto;  /* Push to bottom */
+    position: relative; /* Prevents overlap */
+    bottom: 30px; /* Moves it slightly up from the absolute bottom */
 }
 
 .logout-btn:hover {
@@ -122,10 +125,16 @@ body {
 
 /* Main Content */
 .main-content {
-    margin-left: 270px;
+    margin-left: 300px;
     flex-grow: 1;
     padding: 20px;
-    overflow-y: auto;
+    padding-top: 30px;
+    overflow: hidden;
+}
+
+.main-content h2 {
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 /* Feedback Section */
