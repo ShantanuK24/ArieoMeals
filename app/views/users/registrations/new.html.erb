@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - arieoMeals</title>
-    <%= stylesheet_link_tag "register", media: "all" %>
+    <%= stylesheet_link_tag "Register", media: "all" %>
 </head>
 <body>
     <body style="background: url('<%= asset_path('food.jpg') %>') no-repeat center center/cover;">
-
     <div class="wrapper">
         <div class="glass-box"></div>
         <div class="container">
@@ -16,6 +15,7 @@
             <p class="alert"><%= alert %></p>
             <div class="left-box">
                 <h2 class="brand">arieoMeals</h2>
+                <%= image_tag "chef.png", alt: "arieoMeals img", class: "transparent-img" %>
             </div>
             <div class="register-box">
                 <h2>Register</h2>

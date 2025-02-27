@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>Login</title>
-    <%= stylesheet_link_tag "login", media: "all" %>
+    <%= stylesheet_link_tag "Login", media: "all" %>
 </head>
 
 
-<body style="background: url('<%= asset_path('food.jpg') %>') no-repeat center center/cover;">
+<body style="background-image: url('<%= asset_path('food.jpg') %>'); background-repeat: no-repeat; background-position: center center; background-size: cover;">    
     <div class="wrapper">
         <div class="glass-box"></div>
         <div class="container">
@@ -28,15 +28,6 @@
                     <div class="password-wrapper">
                         <%= f.password_field :password, id: "password", placeholder: "Enter your password", required: true %>
                     </div>
- 
- 
-                    <%# <% if devise_mapping.rememberable? %>
-                     <%#<div class="remember-me">
-                     <%#    <%= f.check_box :remember_me, id: "remember_me" %>
-                     <%#    <%= f.label :remember_me, "Remember Me", for: "remember_me" %>
-                     <%#</div>
-                     <%#<% end %>
- 
  
                     <div class="forgot-password">
                         <%= link_to "Forgot Password?", new_password_path(resource_name) %>
