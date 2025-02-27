@@ -150,15 +150,30 @@ body {
     display: flex;
     gap: 60px;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin-top: 20px;
+    margin-left: 20px;
 }
 
-.meal-item {
+.meal-item, 
+.meal-item-chapati-count {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
+
+/* Ensure chapati-container is initially hidden */
+#chapati-container {
+    display: none; 
+    visibility: hidden;
+}
+
+/* Make sure it appears correctly when needed */
+#chapati-container.active {
+    display: flex;
+    visibility: visible;
+}
+
 
 label {
     font-size: 18px;
