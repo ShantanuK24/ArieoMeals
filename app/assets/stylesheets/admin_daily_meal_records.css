@@ -190,7 +190,7 @@ body {
 .table-container {
     background: white;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 40px;
     border-radius: 10px;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow */
 }
