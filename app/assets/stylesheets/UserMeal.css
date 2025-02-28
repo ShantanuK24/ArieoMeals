@@ -14,7 +14,7 @@ body {
 
 /* Sidebar */
 .sidebar {
-    width: 270px;
+    width: 300px;
     background-color: black;
     color: white;
     height: 100vh;
@@ -60,7 +60,7 @@ body {
 
 .sidebar nav ul li i {
     margin-right: 10px;
-    color: white;
+    color: orange;
 }
 
 .sidebar nav ul li:hover {
@@ -97,6 +97,7 @@ body {
 }
 
 /* Logout Button */
+/* Logout Button */
 .logout-btn {
     background-color: #ff5722;
     color: white;
@@ -107,7 +108,10 @@ body {
     font-size: 16px;
     border-radius: 5px;
     width: 250px;
-    margin: 20px auto;
+    margin-left: 20px;
+    margin-top: auto;  /* Push to bottom */
+    position: relative; /* Prevents overlap */
+    bottom: 30px; /* Moves it slightly up from the absolute bottom */
 }
 
 .logout-btn:hover {
@@ -116,15 +120,15 @@ body {
 
 
 .main-content {
-    margin-left: 270px;
+    margin-left: 300px;
     flex: 1;
-    padding: 40px;
+    padding: 20px;
+    padding-top: 30px;
+    overflow: hidden;
 }
 
 .main-content h2 {
-    font-size: 22px;
-    font-weight: 500;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
@@ -132,27 +136,44 @@ body {
     border: 3px solid #dbdee0; 
     border-radius: 10px;
     padding: 20px;
-    margin-top: 10px;
-    width: 1150px;
-    height: 530px;
+    margin-top: 20px;
+    width: 920px;
+    height: 400px;
     display: flex;
+    justify-self: center;
     flex-direction: column;
-    align-items: flex-start; 
     background: white;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow */
 }
 
 .meal-selection {
     display: flex;
-    gap: 30px;
+    gap: 60px;
     align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
-.meal-item {
+.meal-item, 
+.meal-item-chapati-count {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
+
+/* Ensure chapati-container is initially hidden */
+#chapati-container {
+    display: none; 
+    visibility: hidden;
+}
+
+/* Make sure it appears correctly when needed */
+#chapati-container.active {
+    display: flex;
+    visibility: visible;
+}
+
 
 label {
     font-size: 18px;
@@ -200,4 +221,8 @@ select {
     transform: scale(1.05);
 }
 
-
+/* form */
+form_with {
+    display: flex;
+    justify-content: center;
+}

@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag "forget_password", media: "all" %>
-<body style="background: url('<%= asset_path('food.jpg') %>') no-repeat center center/cover;">
+<body style="background: url('<%= asset_path('Food.jpg') %>') no-repeat center center/cover;">
 
 <div class="wrapper">
     <div class="glass-box"></div>
@@ -8,6 +8,7 @@
         <p class="alert"><%= alert %></p>
         <div class="left-box">
             <h2 class="brand">arieoMeals</h2>
+            <%= image_tag "chef.png", alt: "arieoMeals img", class: "transparent-img" %>
         </div>
         <div class="reset-box">
             <h2>Reset Password</h2>

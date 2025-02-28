@@ -38,7 +38,6 @@
                         <%= f.select :chapati_count, options_for_select([["Select"], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6]], @daily_meal_record.chapati_count), {}, { id: "chapati-count", class: "form-control" } %>
                     </div>
                 </div>
-
                 <!-- Submit Button Inside Meal Container -->
                 <div class="submit-btn-wrapper">
                     <%= f.submit "Submit", class: "submit-btn" %>
@@ -51,20 +50,23 @@
         document.addEventListener("DOMContentLoaded", function () {
             const dinnerSelection = document.getElementById("dinner-selection");
             const chapatiContainer = document.getElementById("chapati-container");
-
+            const chapatiSelect = document.getElementById("chapati-count");
+    
             function toggleChapatiField() {
-                if (dinnerSelection && chapatiContainer) {
-                    chapatiContainer.style.display = dinnerSelection.value === "true" ? "block" : "none";
+                if (dinnerSelection.value === "true") {
+                    chapatiContainer.classList.add("active"); // Apply CSS class
+                    chapatiSelect.removeAttribute("disabled"); // Enable selection
+                } else {
+                    chapatiContainer.classList.remove("active"); // Hide again
+                    chapatiSelect.setAttribute("disabled", "true"); // Disable selection
                 }
             }
-
-            // Run check on page load (in case of pre-filled form)
+    
             if (dinnerSelection) {
                 toggleChapatiField();
                 dinnerSelection.addEventListener("change", toggleChapatiField);
             }
         });
     </script>
-
 </body>
 </html>
